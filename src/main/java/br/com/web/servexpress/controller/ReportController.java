@@ -44,8 +44,8 @@ public class ReportController extends AbstractController {
 	@Autowired
 	private ChartService chartService;
 
-	/* GET /admin/clientes/relatorio */
-	@GetMapping(value = MAPPING_ADMIN + "clientes/relatorio", produces = MediaType.APPLICATION_PDF_VALUE)
+	/* GET /admin/relatorio/clientes */
+	@GetMapping(value = MAPPING_ADMIN + "relatorio/clientes", produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<InputStreamResource> clientesReport() throws IOException {
 
 		List<Cliente> clientes = this.clienteService.lista();
@@ -59,8 +59,8 @@ public class ReportController extends AbstractController {
 				.body(new InputStreamResource(bis));
 	}
 
-	/* GET /admin/vendas-gastos/relatorio */
-	@GetMapping(value = MAPPING_ADMIN + "vendas-gastos/relatorio", produces = MediaType.APPLICATION_PDF_VALUE)
+	/* GET /admin/relatorio/vendas-gastos */
+	@GetMapping(value = MAPPING_ADMIN + "relatorio/vendas-gastos", produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<InputStreamResource> vendasGastosReport() throws IOException, DocumentException {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Disposition", "inline; filename=report.pdf");
@@ -81,8 +81,8 @@ public class ReportController extends AbstractController {
 
 	}
 	
-	/* GET /admin/pedidos-por-mes/relatorio */
-	@GetMapping(value = MAPPING_ADMIN + "pedidos-por-mes/relatorio", produces = MediaType.APPLICATION_PDF_VALUE)
+	/* GET /admin/relatorio/pedidos-por-mes */
+	@GetMapping(value = MAPPING_ADMIN + "relatorio/pedidos-por-mes", produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<InputStreamResource> pedidosPorMes() throws IOException, DocumentException {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Disposition", "inline; filename=report.pdf");
@@ -97,8 +97,8 @@ public class ReportController extends AbstractController {
 
 	}
 
-	/* GET /admin/bairros-mais-usados/relatorio */
-	@GetMapping(value = MAPPING_ADMIN + "bairros-mais-usados/relatorio", produces = MediaType.APPLICATION_PDF_VALUE)
+	/* GET /admin/relatorio/bairros-mais-usados */
+	@GetMapping(value = MAPPING_ADMIN + "relatorio/bairros-mais-usados", produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<InputStreamResource> bairrosMaisUsados() throws IOException, DocumentException {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Disposition", "inline; filename=report.pdf");
