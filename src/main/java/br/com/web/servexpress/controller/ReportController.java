@@ -16,14 +16,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.lowagie.text.DocumentException;
 
 import br.com.web.servexpress.enums.Pagamento;
+import br.com.web.servexpress.helper.ChartHelper;
 import br.com.web.servexpress.model.Cliente;
 import br.com.web.servexpress.reports.ChartModel;
 import br.com.web.servexpress.reports.ChartsTemplates;
+import br.com.web.servexpress.reports.GraficoBairrosMaisUsados;
+import br.com.web.servexpress.reports.GraficoNumeroPedidosMes;
 import br.com.web.servexpress.reports.GraficoVendasGastosReport;
 import br.com.web.servexpress.reports.TodosClientesReport;
 import br.com.web.servexpress.service.ClienteService;
 import br.com.web.servexpress.service.GastoService;
 import br.com.web.servexpress.service.PedidoService;
+import br.com.web.servexpress.service.impl.ChartService;
 
 @Controller
 public class ReportController extends AbstractController {
@@ -36,7 +40,11 @@ public class ReportController extends AbstractController {
 
 	@Autowired
 	private GastoService gastoService;
+	
+	@Autowired
+	private ChartService chartService;
 
+	/* GET /admin/clientes/relatorio */
 	@GetMapping(value = MAPPING_ADMIN + "clientes/relatorio", produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<InputStreamResource> clientesReport() throws IOException {
 
@@ -51,8 +59,9 @@ public class ReportController extends AbstractController {
 				.body(new InputStreamResource(bis));
 	}
 
-	@GetMapping(value = MAPPING_ADMIN + "vendasgastos/relatorio", produces = MediaType.APPLICATION_PDF_VALUE)
-	public ResponseEntity<InputStreamResource> clienteGrafic() throws IOException, DocumentException {
+	/* GET /admin/vendas-gastos/relatorio */
+	@GetMapping(value = MAPPING_ADMIN + "vendas-gastos/relatorio", produces = MediaType.APPLICATION_PDF_VALUE)
+	public ResponseEntity<InputStreamResource> vendasGastosReport() throws IOException, DocumentException {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Disposition", "inline; filename=report.pdf");
 
@@ -71,5 +80,38 @@ public class ReportController extends AbstractController {
 				.body(new InputStreamResource(bis));
 
 	}
+	
+	/* GET /admin/pedidos-por-mes/relatorio */
+	@GetMapping(value = MAPPING_ADMIN + "pedidos-por-mes/relatorio", produces = MediaType.APPLICATION_PDF_VALUE)
+	public ResponseEntity<InputStreamResource> pedidosPorMes() throws IOException, DocumentException {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Disposition", "inline; filename=report.pdf");
 
+		List<ChartHelper> values = this.chartService.barFromPedidos();
+
+		ByteArrayInputStream bis = GraficoNumeroPedidosMes.create(ChartsTemplates.generateBarChartHelper("Número de pedidos por mês", "Mês", "Número de pedidos", values), 500, 400);
+		return ResponseEntity.ok()
+				.headers(headers)
+				.contentType(MediaType.APPLICATION_PDF)
+				.body(new InputStreamResource(bis));
+
+	}
+
+	/* GET /admin/bairros-mais-usados/relatorio */
+	@GetMapping(value = MAPPING_ADMIN + "bairros-mais-usados/relatorio", produces = MediaType.APPLICATION_PDF_VALUE)
+	public ResponseEntity<InputStreamResource> bairrosMaisUsados() throws IOException, DocumentException {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Disposition", "inline; filename=report.pdf");
+
+		List<ChartModel> values = this.chartService.bairrosPorPedidos();
+
+		ByteArrayInputStream bis = GraficoBairrosMaisUsados.create(ChartsTemplates.generateBarChartModel("Bairros mais usados em pedidos", "Bairro", "Número de bairros usados", values), 500, 400);
+		return ResponseEntity.ok()
+				.headers(headers)
+				.contentType(MediaType.APPLICATION_PDF)
+				.body(new InputStreamResource(bis));
+
+	}
+	
+	
 }

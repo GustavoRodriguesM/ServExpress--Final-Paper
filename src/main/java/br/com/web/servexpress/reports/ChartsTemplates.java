@@ -1,5 +1,6 @@
 package br.com.web.servexpress.reports;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.jfree.chart.ChartFactory;
@@ -8,34 +9,48 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
+import br.com.web.servexpress.helper.ChartHelper;
+
 public class ChartsTemplates {
 
 	public static JFreeChart generatePieChart(String title, List<ChartModel> values) {
 		DefaultPieDataset dataSet = new DefaultPieDataset();
-		
+
 		for (ChartModel chart : values) {
 			dataSet.setValue(chart.getDescricao(), chart.getValor());
 		}
 
-		JFreeChart chart = ChartFactory.createPieChart(
-				title, dataSet, true, true, false);
+		JFreeChart chart = ChartFactory.createPieChart(title, dataSet, true, true, false);
 
 		return chart;
 	}
 
-	public static JFreeChart generateBarChart() {
+	public static JFreeChart generateBarChartHelper(String title, String dataType, String legend, List<ChartHelper> values) {
 		DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
-		dataSet.setValue(791, "Population", "1750 AD");
-		dataSet.setValue(978, "Population", "1800 AD");
-		dataSet.setValue(1262, "Population", "1850 AD");
-		dataSet.setValue(1650, "Population", "1900 AD");
-		dataSet.setValue(2519, "Population", "1950 AD");
-		dataSet.setValue(6070, "Population", "2000 AD");
 
-		JFreeChart chart = ChartFactory.createBarChart(
-				"World Population growth", "Year", "Population in millions",
-				dataSet, PlotOrientation.VERTICAL, false, true, false);
+		Collections.reverse(values);
+		for (ChartHelper chart : values) {
+			dataSet.setValue(chart.getAmount().intValue(), dataType, chart.getMonth());
+		}
+
+		JFreeChart chart = ChartFactory.createBarChart(title, dataType, legend, dataSet, PlotOrientation.HORIZONTAL,
+				false, false, false);
 
 		return chart;
 	}
+	
+	public static JFreeChart generateBarChartModel(String title, String dataType, String legend, List<ChartModel> values) {
+		DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
+
+		Collections.reverse(values);
+		for (ChartModel chart : values) {
+			dataSet.setValue(chart.getValor().intValue(), dataType, chart.getDescricao());
+		}
+
+		JFreeChart chart = ChartFactory.createBarChart(title, dataType, legend, dataSet, PlotOrientation.HORIZONTAL,
+				false, false, false);
+
+		return chart;
+	}
+
 }
