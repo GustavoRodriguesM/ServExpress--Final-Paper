@@ -50,6 +50,9 @@
 							</tbody>
 						</table>
 					</div>
+					<div class="text-center">
+						<a href="<c:url value='/admin/relatorio/clientes'/>" class="btn btn-themecolor btn-rounded">Relatório geral de clientes</a>
+					</div>
 				</div>
 			</div>
 		</div>

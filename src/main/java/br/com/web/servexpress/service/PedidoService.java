@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.com.web.servexpress.enums.Pagamento;
 import br.com.web.servexpress.enums.StatusPedido;
+import br.com.web.servexpress.exceptions.PagamentoNaoEfetuadoException;
 import br.com.web.servexpress.model.Cliente;
 import br.com.web.servexpress.model.Entregador;
 import br.com.web.servexpress.model.Pedido;
@@ -36,7 +37,7 @@ public interface PedidoService extends AbstractService<Pedido> {
 
 	Long conta(Pagamento pagamento);
 
-	void mudaStatus(Pedido pedido);
+	void mudaStatus(Pedido pedido) throws PagamentoNaoEfetuadoException;
 
 	void pagamento(Pedido pedido);
 

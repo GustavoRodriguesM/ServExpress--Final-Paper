@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.web.servexpress.enums.Pagamento;
 import br.com.web.servexpress.enums.StatusPedido;
+import br.com.web.servexpress.exceptions.PagamentoNaoEfetuadoException;
 import br.com.web.servexpress.model.Cliente;
 import br.com.web.servexpress.model.Entregador;
 import br.com.web.servexpress.model.Pedido;
@@ -162,7 +163,7 @@ public class PedidoServiceImpl implements PedidoService {
 	}
 
 	@Override
-	public void mudaStatus(Pedido pedido) {
+	public void mudaStatus(Pedido pedido) throws PagamentoNaoEfetuadoException {
 		switch (pedido.getStatusPedido()) {
 		case PENDENTE:
 			pedido.setStatusPedido(StatusPedido.ENTREGADOR_ENVIADO_A_RESIDENCIA);
@@ -174,7 +175,10 @@ public class PedidoServiceImpl implements PedidoService {
 			pedido.setStatusPedido(StatusPedido.SECANDO);
 			break;
 		case SECANDO:
-			pedido.setStatusPedido(StatusPedido.ENTREGANDO);
+			if(pedido.getPagamento() == Pagamento.PAGO)
+				pedido.setStatusPedido(StatusPedido.ENTREGANDO);
+			else
+				throw new PagamentoNaoEfetuadoException();
 			break;
 		case ENTREGANDO:
 			pedido.setStatusPedido(StatusPedido.ENTREGUE);

@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.web.servexpress.enums.StatusPedido;
+import br.com.web.servexpress.exceptions.PagamentoNaoEfetuadoException;
 import br.com.web.servexpress.model.Bairro;
 import br.com.web.servexpress.model.Cliente;
 import br.com.web.servexpress.model.Endereco;
@@ -165,13 +166,12 @@ public class PedidoController extends AbstractController {
 		Entregador entregador = this.entregadorService.busca(getUser());
 
 		String mensagem = null;
-		
+
 		try {
 			this.pedidoService.sendABiker(pedido, entregador, StatusPedido.ENTREGADOR_ENVIADO_A_RESIDENCIA);
 			sendEmail.statusAlterado(pedido);
 			mensagem = this.successMessage();
 		} catch (Exception e) {
-			e.printStackTrace();
 			mensagem = this.errorMessage();
 		}
 		attributes.addFlashAttribute(CAMPO_SWEETMESSAGE, mensagem);
@@ -188,7 +188,6 @@ public class PedidoController extends AbstractController {
 			this.pedidoService.delivering(pedido);
 			mensagem = this.successMessage();
 		} catch (Exception e) {
-			e.printStackTrace();
 			mensagem = this.errorMessage();
 		}
 
@@ -206,7 +205,6 @@ public class PedidoController extends AbstractController {
 			this.pedidoService.pagamento(pedido);
 			mensagem = this.successMessage();
 		} catch (Exception e) {
-			e.printStackTrace();
 			mensagem = this.errorMessage();
 		}
 		attributes.addFlashAttribute(CAMPO_SWEETMESSAGE, mensagem);
@@ -230,11 +228,12 @@ public class PedidoController extends AbstractController {
 			if (pedido.getStatusPedido() == StatusPedido.ENTREGANDO)
 				sendEmail.statusAlterado(pedido);
 			mensagem = this.successMessage();
+		} catch (PagamentoNaoEfetuadoException e) {
+			mensagem = this.errorMessage("Pagamento não efetuado!");
 		} catch (Exception e) {
-			e.printStackTrace();
 			mensagem = this.errorMessage();
 		}
-		
+
 		attributes.addFlashAttribute(CAMPO_SWEETMESSAGE, mensagem);
 		return this.redirect("/admin/pedido");
 	}
@@ -257,7 +256,7 @@ public class PedidoController extends AbstractController {
 		return this.redirect("/admin/pedido");
 	}
 
-	@GetMapping(MAPPING_ADMIN+ "pedido")
+	@GetMapping(MAPPING_ADMIN + "pedido")
 	public ModelAndView pedido() {
 		List<Pedido> pedidos = this.pedidoService.lista();
 		Collections.reverse(pedidos);

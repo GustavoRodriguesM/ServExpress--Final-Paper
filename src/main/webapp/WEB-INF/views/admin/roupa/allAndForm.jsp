@@ -17,12 +17,12 @@
 		<div class="container-fluid">
 			<div class="row page-titles">
 				<div class="col-md-12 content align-self-center">
-					<h3 class="text-themecolor pull-left">Roupas</h3>
+					<h3 class="text-themecolor pull-left">Peças</h3>
 					<ol class="breadcrumb pull-right">
 						<li class="breadcrumb-item"><a
 							href="<c:url value='/admin/dashboard'/>">Home</a></li>
 						<li class="breadcrumb-item"><a
-							href="<c:url value='/admin/roupa'/>">Roupa</a></li>
+							href="<c:url value='/admin/roupa'/>">Peça</a></li>
 						<li class="breadcrumb-item active">Todas / Formulário</li>
 					</ol>
 				</div>
@@ -40,7 +40,7 @@
 							<div class="form-group">
 
 								<form:input path="id" type="hidden" />
-								<label>Nome da Roupa</label>
+								<label>Nome</label>
 								<div class="alert-danger text-center">
 									<span><form:errors path="descricao" /></span>
 								</div>
@@ -64,14 +64,14 @@
 					</div>
 
 					<div class="col-md-8 offset-md-2">
-						<h4 class="text-center" style="margin-top: 2em">Roupas
+						<h4 class="text-center" style="margin-top: 2em">Peças
 							cadastradas</h4>
 						<div class="table-responsive">
 
 							<table class="table color-table info-table">
 								<thead>
 									<tr>
-										<th>Roupa</th>
+										<th>Peça</th>
 										<th>Preço unitário</th>
 										<th>Editar</th>
 										<th>Excluir</th>

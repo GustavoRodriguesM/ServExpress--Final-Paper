@@ -18,15 +18,18 @@
 				<div class="col-md-12 content align-self-center">
 					<h3 class="text-themecolor pull-left">Pedido</h3>
 					<ol class="breadcrumb pull-right">
-						<li class="breadcrumb-item"><a href="<c:url value='/admin/dashboard'/>">Home</a></li>
-						<li class="breadcrumb-item"><a href="<c:url value='/admin/pedido'/>">Pedido</a></li>
+						<li class="breadcrumb-item"><a
+							href="<c:url value='/admin/dashboard'/>">Home</a></li>
+						<li class="breadcrumb-item"><a
+							href="<c:url value='/admin/pedido'/>">Pedido</a></li>
 						<li class="breadcrumb-item active">Todos</li>
 					</ol>
 				</div>
 			</div>
 			<div class="row content">
-				<div class="col-md-8 offset-md-2">
+				<div class="col-md-10 offset-md-1">
 					${message}
+					
 
 					<div class="table-responsive">
 
@@ -46,7 +49,7 @@
 								<c:forEach var="pedido" items="${pedidos}">
 									<tr>
 										<td><b><a
-											href="<c:url value='/admin/pedido/${pedido.id}'/>">${pedido.id}</a></b></td>
+												href="<c:url value='/admin/pedido/${pedido.id}'/>">${pedido.id}</a></b></td>
 										<td>${pedido.cliente.usuario.nome}</td>
 										<td><fmt:formatDate value="${pedido.dataEmissao.time}"
 												pattern="dd/MM/yyyy HH:mm" /></td>
@@ -81,6 +84,10 @@
 								</c:forEach>
 							</tbody>
 						</table>
+					</div>
+					<div class="text-center">
+						<a href="<c:url value='/admin/relatorio/pedidos-por-mes'/>"
+							class="btn btn-themecolor btn-rounded">Relatório geral pedidos por mês</a>
 					</div>
 				</div>
 			</div>

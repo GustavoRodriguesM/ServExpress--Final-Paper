@@ -69,7 +69,7 @@
 
 					<li><a class="waves-effect waves-dark"
 						href="<c:url value='/admin/roupa'/>" aria-expanded="false"><i
-							class="fa fa-universal-access"></i><span class="hide-menu">Roupa</span></a></li>
+							class="fa fa-universal-access"></i><span class="hide-menu">Peças</span></a></li>
 
 					<li><a class="waves-effect waves-dark"
 						href="<c:url value='/admin/bairro'/>" aria-expanded="false"><i

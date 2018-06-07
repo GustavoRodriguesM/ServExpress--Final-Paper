@@ -27,7 +27,6 @@
 				</div>
 			</div>
 			<div class="content">
-
 				<div class="row">
 
 					<div class="col-md-12">${message}</div>
@@ -175,7 +174,11 @@
 
 					</div>
 				</div>
-
+				<div class="text-center">
+					<a href="<c:url value='/admin/relatorio/vendas-gastos'/>"
+						class="btn btn-themecolor btn-rounded">Relatório geral de
+						vendas e gastos</a>
+				</div>
 			</div>
 		</div>
 		<footer class="footer"> © 2018 ServExpress por BlackCode </footer>
