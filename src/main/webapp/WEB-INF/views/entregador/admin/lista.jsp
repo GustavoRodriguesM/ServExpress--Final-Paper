@@ -33,7 +33,7 @@
 					<div class="col-md-12">${message}</div>
 
 					<div class="col-md-8 offset-md-2 table-responsive ">
-						
+
 						<div class="table-responsive">
 
 							<table class="table table-hover color-table info-table">
@@ -43,6 +43,7 @@
 										<th>RG</th>
 										<th>CNH</th>
 										<th>Status do entregador</th>
+										<th>Remover</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -52,13 +53,31 @@
 											<td>${entregador.rg}</td>
 											<td>${entregador.cnh}</td>
 											<td><b>${entregador.status.descricao}</b></td>
+											<td>
+												<c:if test="${entregador.status == 'EMPREGADO'}">
+													<form:form
+														servletRelativeAction="/admin/entregador/desativar">
+														<input type="hidden" name="id" value="${entregador.id}" />
+														<input type="submit" class="btn btn-danger"
+															value="Desativar" />
+													</form:form>
+												</c:if>
+												<c:if test="${entregador.status == 'DEMITIDO'}">
+													<form:form
+														servletRelativeAction="/admin/entregador/ativar">
+														<input type="hidden" name="id" value="${entregador.id}" />
+														<input type="submit" class="btn btn-success"
+															value="Reativar" />
+													</form:form>
+												</c:if>
+											</td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
 
 						</div>
-						
+
 						<div class="col-md-12 text-center">
 							<a class="btn btn-primary"
 								href="<c:url value='/admin/entregador/add'/>">Adicionar

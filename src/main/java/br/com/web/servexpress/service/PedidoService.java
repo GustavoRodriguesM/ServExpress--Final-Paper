@@ -6,6 +6,7 @@ import java.util.List;
 import br.com.web.servexpress.enums.Pagamento;
 import br.com.web.servexpress.enums.StatusPedido;
 import br.com.web.servexpress.exceptions.PagamentoNaoEfetuadoException;
+import br.com.web.servexpress.exceptions.PedidoSemPecasException;
 import br.com.web.servexpress.model.Cliente;
 import br.com.web.servexpress.model.Entregador;
 import br.com.web.servexpress.model.Pedido;
@@ -13,7 +14,7 @@ import br.com.web.servexpress.model.PedidoRoupa;
 import br.com.web.servexpress.wrapper.PedidoRoupaWrapper;
 
 public interface PedidoService extends AbstractService<Pedido> {
-	void persiste(PedidoRoupaWrapper pedidoRoupaWrapper);
+	void persiste(PedidoRoupaWrapper pedidoRoupaWrapper) throws PedidoSemPecasException;
 
 	PedidoRoupa buscaUltimo(Cliente cliente);
 

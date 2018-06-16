@@ -110,7 +110,7 @@ public class AuthController extends AbstractController {
 			e.printStackTrace();
 			mensagem = this.errorMessage("Erro ao tentar enviar email.");
 		}
-		attributes.addFlashAttribute("message", mensagem);
+		attributes.addFlashAttribute(CAMPO_SWEETMESSAGE, mensagem);
 		return this.redirect("/login");
 	}
 

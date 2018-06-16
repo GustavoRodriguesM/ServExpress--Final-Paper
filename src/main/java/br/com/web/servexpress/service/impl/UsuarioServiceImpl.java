@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.web.servexpress.model.Role;
 import br.com.web.servexpress.model.Usuario;
+import br.com.web.servexpress.repository.RoleRepository;
 import br.com.web.servexpress.repository.UsuarioRepository;
 import br.com.web.servexpress.service.UsuarioService;
 
@@ -19,6 +20,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Autowired
 	private UsuarioRepository userRepository;
 
+	@Autowired
+	private RoleRepository roleRepository;
+	
 	@Override
 	public Usuario findByEmail(String email) {
 		return this.userRepository.findByEmail(email);
@@ -78,11 +82,27 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return (List<Usuario>) this.userRepository.findAll();
 	}
 
-
 	@Override
 	public void altera(Usuario user) {
 		this.userRepository.save(user);
 	}
 
+	@Override
+	public void desativa(Usuario usuario) {
+		Role role = this.roleRepository.findById("ROLE_DISABLE").get();
+		List<Role> roles = usuario.getRoles();
+		roles.add(role);
+		usuario.setRoles(roles);
+		
+		this.userRepository.save(usuario);
+	}
+	
+	@Override
+	public void ativa(Usuario usuario) {
+		Role role = this.roleRepository.findById("ROLE_DISABLE").get();
+		usuario.getRoles().remove(role);
+		
+		this.userRepository.save(usuario);
+	}
 
 }

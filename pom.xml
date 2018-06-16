@@ -138,14 +138,7 @@
 			<artifactId>webapp-runner</artifactId>
 			<version>8.5.28.0</version>
 		</dependency>
-
-		<!-- ALERTMESSAGE -->
-		<dependency>
-			<groupId>br.com.gustavorodrigues</groupId>
-			<artifactId>alertmessage</artifactId>
-			<version>1.0.1-RELEASE</version>
-		</dependency>
-
+		
 		<dependency>
 			<groupId>com.itextpdf</groupId>
 			<artifactId>root</artifactId>
@@ -187,7 +180,7 @@
 									<groupId>com.github.jsimone</groupId>
 									<artifactId>webapp-runner</artifactId>
 									<version>7.0.57.2</version>
-									<destFileName>webapp-runner.jar</destFileName>
+									<destFileName>webapp- runner.jar</destFileName>
 								</artifactItem>
 							</artifactItems>
 						</configuration>

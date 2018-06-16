@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.web.servexpress.enums.StatusPedido;
 import br.com.web.servexpress.exceptions.PagamentoNaoEfetuadoException;
+import br.com.web.servexpress.exceptions.PedidoSemPecasException;
 import br.com.web.servexpress.model.Bairro;
 import br.com.web.servexpress.model.Cliente;
 import br.com.web.servexpress.model.Endereco;
@@ -106,6 +107,9 @@ public class PedidoController extends AbstractController {
 			});
 			pedidoService.persiste(pedidoRoupaWrapper);
 			mensagem = this.successMessage("Pedido cadastrado com sucesso!");
+		} catch (PedidoSemPecasException pspe) {
+			pspe.printStackTrace();
+			mensagem = this.errorMessage("Pedido sem peças para cadastrar");
 		} catch (Exception e) {
 			e.printStackTrace();
 			mensagem = this.errorMessage("Erro ao cadastrar pedido");

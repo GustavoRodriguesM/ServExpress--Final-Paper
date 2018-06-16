@@ -40,6 +40,7 @@ public class InitData implements ApplicationListener<ApplicationContextEvent> {
 			roleRepository.save(new Role("ROLE_CLIENTE"));
 			roleRepository.save(new Role("ROLE_ADMINISTRADOR"));
 			roleRepository.save(new Role("ROLE_ENTREGADOR"));
+			roleRepository.save(new Role("ROLE_DISABLE"));
 
 			Usuario user = new Usuario();
 			user.setEmail("admin@servexpress.com.br");

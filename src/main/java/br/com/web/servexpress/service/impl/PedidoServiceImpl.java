@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import br.com.web.servexpress.enums.Pagamento;
 import br.com.web.servexpress.enums.StatusPedido;
 import br.com.web.servexpress.exceptions.PagamentoNaoEfetuadoException;
+import br.com.web.servexpress.exceptions.PedidoSemPecasException;
 import br.com.web.servexpress.model.Cliente;
 import br.com.web.servexpress.model.Entregador;
 import br.com.web.servexpress.model.Pedido;
@@ -35,7 +36,7 @@ public class PedidoServiceImpl implements PedidoService {
 	private PedidoRoupaRepository pedidoRoupaRepository;
 
 	@Override
-	public void persiste(PedidoRoupaWrapper pedidoRoupaWrapper) {
+	public void persiste(PedidoRoupaWrapper pedidoRoupaWrapper) throws PedidoSemPecasException {
 		Double total = 0.0;
 
 		List<Roupa> roupas = new ArrayList<>();
@@ -46,8 +47,12 @@ public class PedidoServiceImpl implements PedidoService {
 			roupas.add(roupa);
 			quantidades.add(s.getQuantidade());
 		});
+		Pedido pedido = null;
 
-		Pedido pedido = pedidoRoupaWrapper.getPedidoRoupas().get(0).getPedido();
+		if (pedidoRoupaWrapper.getPedidoRoupas().size() <= 0)
+			throw new PedidoSemPecasException();
+		else
+			pedido = pedidoRoupaWrapper.getPedidoRoupas().get(0).getPedido();
 
 		pedido.setPagamento(Pagamento.PENDENTE);
 		pedido.setStatusPedido(StatusPedido.PENDENTE);
@@ -175,7 +180,7 @@ public class PedidoServiceImpl implements PedidoService {
 			pedido.setStatusPedido(StatusPedido.SECANDO);
 			break;
 		case SECANDO:
-			if(pedido.getPagamento() == Pagamento.PAGO)
+			if (pedido.getPagamento() == Pagamento.PAGO)
 				pedido.setStatusPedido(StatusPedido.ENTREGANDO);
 			else
 				throw new PagamentoNaoEfetuadoException();

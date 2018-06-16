@@ -45,7 +45,7 @@ public class EntregadorController extends AbstractController {
 
 	@GetMapping(MAPPING_ADMIN + "entregador")
 	public ModelAndView entregador() {
-		List<Entregador> entregadores = this.entregadorService.lista();
+		List<Entregador> entregadores = this.entregadorService.listaComDeletados();
 		return this.modelAndView(PAGINA_ENTREGADOR).addObject("entregadores", entregadores);
 	}
 
@@ -94,4 +94,17 @@ public class EntregadorController extends AbstractController {
 		return this.modelAndView(PAGINA_ENTREGADOR_DETAIL).addObject("entregador", entregador);
 	}
 
+	@PostMapping(MAPPING_ADMIN + "entregador/desativar")
+	public ModelAndView entregadorDesativar(Long id, RedirectAttributes attributes) {
+		this.entregadorService.desativa(this.entregadorService.busca(id));
+		attributes.addFlashAttribute(CAMPO_SWEETMESSAGE, this.successMessage());
+		return this.redirect("/admin/entregador");
+	}
+	
+	@PostMapping(MAPPING_ADMIN + "entregador/ativar")
+	public ModelAndView entregadorAtivar(Long id, RedirectAttributes attributes) {
+		this.entregadorService.ativa(this.entregadorService.busca(id));
+		attributes.addFlashAttribute(CAMPO_SWEETMESSAGE, this.successMessage());
+		return this.redirect("/admin/entregador");
+	}
 }

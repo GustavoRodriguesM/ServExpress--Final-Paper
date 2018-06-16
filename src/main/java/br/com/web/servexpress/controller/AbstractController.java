@@ -8,9 +8,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import br.com.gustavorodrigues.alertmessage.enums.TypeMessage;
-import br.com.gustavorodrigues.alertmessage.exception.RapidMessageException;
-import br.com.gustavorodrigues.alertmessage.templates.SweetAlertMessage;
+import br.com.web.servexpress.alertmessage.RapidMessageException;
+import br.com.web.servexpress.alertmessage.SweetAlertMessage;
+import br.com.web.servexpress.alertmessage.TypeMessage;
 import br.com.web.servexpress.model.Usuario;
 
 public abstract class AbstractController {

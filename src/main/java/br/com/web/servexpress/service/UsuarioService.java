@@ -14,4 +14,8 @@ public interface UsuarioService extends AbstractService<Usuario> {
 
 	void persiste(Usuario usuario, String role);
 
+	void desativa(Usuario usuario);
+
+	void ativa(Usuario usuario);
+
 }
