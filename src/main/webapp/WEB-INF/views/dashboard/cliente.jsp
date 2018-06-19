@@ -130,8 +130,7 @@
 														<td>${s.index + 1}</td>
 														<td>${pedidoRoupa.roupa.descricao}</td>
 														<td>${pedidoRoupa.quantidade}</td>
-														<td>R$${pedidoRoupa.quantidade *
-															pedidoRoupa.roupa.valorUnitario}</td>
+														<td>R$ <fmt:formatNumber value ="${pedidoRoupa.quantidade * pedidoRoupa.roupa.valorUnitario}" maxFractionDigits="2" minFractionDigits="2" /></td>
 													</tr>
 												</c:forEach>
 											</tbody>
@@ -141,7 +140,7 @@
 								<div class="col-md-12">
 									<div class="pull-right m-t-30 text-right">
 										<h3>
-											<b>Total :</b> R$${pedidoRoupa.pedido.total}
+											<b>Total :</b> R$ <fmt:formatNumber value ="${pedidoRoupa.pedido.total}" maxFractionDigits="2" minFractionDigits="2" />
 										</h3>
 									</div>
 									<div class="clearfix"></div>

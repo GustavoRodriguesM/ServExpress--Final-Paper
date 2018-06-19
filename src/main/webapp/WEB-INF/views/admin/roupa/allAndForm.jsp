@@ -45,7 +45,7 @@
 									<span><form:errors path="descricao" /></span>
 								</div>
 								<form:input class="form-control" path="descricao"
-									placeholder="Digite o nome da roupa" autofocus="true" />
+									placeholder="Digite o nome da peça" autofocus="true" />
 							</div>
 							<div class="form-group">
 								<label>Preço</label>

@@ -6,7 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="security"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <myTags:template bodyName="Dashboard">
@@ -49,7 +49,7 @@
 
 										<td><fmt:formatDate value="${pedido.dataEmissao.time}"
 												pattern="dd/MM/yyyy HH:mm" /></td>
-										<td>R$ ${pedido.total}</td>
+										<td>R$ ${pedido.total} </td>
 										<td>${pedido.pagamento.descricao}</td>
 										<td><c:choose>
 												<c:when test="${pedido.statusPedido == 'PENDENTE'}">

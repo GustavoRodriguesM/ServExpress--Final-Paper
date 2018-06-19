@@ -37,7 +37,7 @@
 			console.log(a);
 			}
 		</c:forEach>
-		document.getElementById('total').innerHTML ="<h3><span style='color: #26a69a'>Total:</span> R$ " + a + "</h3>";
+		document.getElementById('total').innerHTML ="<h3><span style='color: #26a69a'>Total:</span> " + a.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) + "</h3>";
 	}
 
 	function totalAParte(roupaID, qnt){
@@ -46,7 +46,7 @@
 		if(document.getElementById(roupaID).checked && roupaID == "check${roupa.id}"){
 			total = 0;
 			total = (${roupa.valorUnitario} * qnt.value);
-			document.getElementById('lbl${roupa.id}').innerHTML = "Valor parcial: R$ " + total;
+			document.getElementById('lbl${roupa.id}').innerHTML = "Valor parcial: R$ " + total.toFixed(2);
 		}
 		
 		</c:forEach>
@@ -102,7 +102,7 @@
 											onblur="apagar(this, 'check' + ${roupa.id})"
 											onfocus="checar('check'+ ${roupa.id})" /></td>
 										<td><label id='lbl${roupa.id}'>Valor parcial: R$
-												0.0</label></td>
+												0.00</label></td>
 									</tr>
 
 

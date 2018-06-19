@@ -94,8 +94,7 @@
 														<td>${s.index + 1}</td>
 														<td>${pedidoRoupa.roupa.descricao}</td>
 														<td>${pedidoRoupa.quantidade}</td>
-														<td>R$${pedidoRoupa.quantidade *
-															pedidoRoupa.roupa.valorUnitario}</td>
+														<td>R$ <fmt:formatNumber value ="${pedidoRoupa.quantidade * pedidoRoupa.roupa.valorUnitario}" maxFractionDigits="2" minFractionDigits="2" /></td>
 													</tr>
 												</c:forEach>
 											</tbody>
