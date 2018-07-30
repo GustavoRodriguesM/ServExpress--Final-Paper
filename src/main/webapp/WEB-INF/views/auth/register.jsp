@@ -99,6 +99,16 @@
 										</div>
 									</div>
 								</div>
+								
+								<div class="form-group">
+									
+									<label>Observaçoes</label>
+									<div class="alert-danger text-center">
+										<form:errors path="observacao" />
+									</div>
+									<form:textarea class="form-control"
+										path="observacao" placeholder="Digite um observação em caso de ALERGIAS OU LIMITAÇÕES" cols="10"/>
+								</div>
 
 								<div class="form-group">
 									<div class="form-row">

@@ -46,6 +46,13 @@
 							</div>
 
 						</div>
+						<div class="row" style="margin-top: 2em">
+
+							<div class="col-md-8 offset-md-2 text-center">
+								<span style="color: #d10808 !important">Observações<br /> <b>${cliente.observacao}</b></span>
+							</div>
+
+						</div>
 
 						<br />
 						<hr>
@@ -125,4 +132,5 @@
 			</div>
 			<footer class="footer"> © 2018 ServExpress por BlackCode </footer>
 		</div>
+	</div>
 </myTags:template>

@@ -75,6 +75,14 @@
 										</div>
 									</div>
 								</div>
+								<div class="form-group">
+									<label>Observações</label>
+									<div class="alert-danger text-center">
+										<form:errors path="observacao" />
+									</div>
+									<form:textarea class="form-control" path="observacao" />
+										
+								</div>
 
 								<form:input type="hidden" path="id" />
 								<form:input type="hidden" path="usuario.dataCadastro" />

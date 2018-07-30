@@ -18,13 +18,15 @@ public class Cliente {
 
 	private String cpf;
 
+	private String observacao;
+
 	@OneToOne
 	private Usuario usuario;
 
 	@OneToOne
 	private Endereco endereco;
 
-	@OneToMany(mappedBy="cliente")
+	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos;
 
 	private boolean feedback;
@@ -75,6 +77,14 @@ public class Cliente {
 
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
+	}
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 
 }
